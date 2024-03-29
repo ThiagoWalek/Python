@@ -1,0 +1,6 @@
+frase = input("Digite uma frase: ")
+print("Sua frase em maiúsculas - ",frase.upper())
+print("Sua frase em minúsculas - ",frase.lower())
+print(f"Sua frase tem {len(frase.replace(' ', ''))} letras")
+frase = frase.split()
+print(f"A primeira palavra de seu frase tem {len((frase[0]))} letras")

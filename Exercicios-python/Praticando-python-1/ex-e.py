@@ -1,0 +1,5 @@
+valor = float(input("Qual o valor:"))
+taxa = float(input("Qual a taxa:"))
+tempo = float(input("Qual foi o prazo em meses:"))
+prestacao = valor + (valor * (taxa/100) * tempo)
+print(f"A prestação foi de: R${prestacao}")
