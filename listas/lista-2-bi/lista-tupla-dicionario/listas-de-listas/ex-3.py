@@ -1,0 +1,12 @@
+lista = list()
+for i in range(9):
+    user = int(input(f"Digite o número da posição {i} da matriz: "))
+    lista.append(user)
+print(f"Essa lista = {lista} irá se transformar em uma matriz!")
+print()
+print("Matriz:")
+print("         coluna 1   coluna 2   coluna 3")
+print()
+print("linha 1 -  ",lista[0]," "*8,lista[1]," "*8,lista[2],"\n")
+print("linha 2 -  ",lista[3]," "*8,lista[4]," "*8,lista[5],"\n")
+print("linha 3 -  ",lista[6]," "*8,lista[7]," "*8,lista[8],"\n")
