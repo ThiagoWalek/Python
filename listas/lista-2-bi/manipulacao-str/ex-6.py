@@ -1,4 +1,8 @@
 nome = input("Digite um nome: ")
 nome = nome.split()
+print("-"*30)
+print("-"*30)
 print("Esse é o seu primeiro nome - ",nome[0])
+print("-"*30)
 print("Esse é seu último nome - ",nome[-1])
+print("-"*30)

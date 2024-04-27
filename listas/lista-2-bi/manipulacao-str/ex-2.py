@@ -8,8 +8,6 @@ centena = ''
 dezena = ''
 unidade = ''
 
-# 9999
-
 if num_len == 1:
     unidade = num[0]
 elif num_len == 2:
@@ -25,9 +23,8 @@ elif num_len == 4:
     dezena= num[2]
     unidade = num[3]
     
-print(f"O número digitado tem {milhar} milhar(es), {centena} centena(s), {milhar} dezena(s), {unidade} unidade(s).")
-
-'''print("Unidades = ",unidade)
-print("dezenas = ",dezena)
-print("Centenas = ",centena)
-print("Milhares = ",milhar)'''
+print("O número digitado tem:")
+print("Milhar(es) = ",milhar)
+print("Centena(s) = ",centena)
+print("Dezena(s) = ",dezena)
+print("Unidade(s) = ",unidade)

@@ -1,5 +1,5 @@
 nome = input("Digite seu nome: ")
 if nome.count("Silva"):
-    print("Seu nome tem 'Silva' = true")
+    print("Seu nome tem 'Silva'")
 else:
-    print("Seu nome tem 'Silva' = false")
+    print("Seu nome não tem 'Silva'")
