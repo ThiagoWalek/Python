@@ -1,6 +1,8 @@
 cpf_armazen = list()
 controle_cpf = 0
-qtd_cpfs = 0
+qtd_cpfs = 10
+cpf_validos = 0
+cpf_invalidos = 0
 while True:
     cpf_usuario = input("Digite o seu cpf: ")
     print(cpf_usuario.isnumeric())
@@ -61,21 +63,26 @@ while True:
             print("CPF valido valido")
             cpf_armazen[controle_cpf]["VALIDACAO"] = "VALIDO"
             print(cpf_armazen)
+            cpf_validos += 1
         else:
             print("CPF invalido invalido")
             cpf_armazen[controle_cpf]["VALIDACAO"] = "INVALIDO"
             print(cpf_armazen)
+            cpf_invalidos += 1
         qtd_cpfs += 1
         controle_cpf += 1
         if input(str("Dejesa Continuar o programa? s/n")) != "s":
             break
     else:
-        print("Cpf invalido")
+        print("Cpf inválido!!!")
+print("-"*95)
+print(" "*13,f"A quantidade de CPFS testado foi de: {qtd_cpfs}")
+print(" "*13,f"A quantdade de CPFS VÁLIDOS foram de: {cpf_validos}")
+print(" "*13,f"A quantdade de CPFS INVÁLIDOS foram de: {cpf_invalidos}")
+print(" "*13,f"A porcentagem de CPFS VÁLIDOS em relação ao total de CPFS testados foi de: {(cpf_validos*100)/qtd_cpfs}")
+print(" "*13,f"A porcentagem de CPFS INVÁLIDOS em relação ao total de CPFS testados foi de: {(cpf_invalidos*100)/qtd_cpfs}")
+print("-"*95)
 
-print(""*30,"A quantidade de CPFS testado foi de: ",qtd_cpfs)
-#print(""*30,"A quantdade de CPFS VÁLIDOS foram de: ",cpf_validos)
-#print(""*30,"A quantdade de CPFS INVÁLIDOS foram de: ",cpf_invalidos)
-print(""*30,"A porcentagem de CPFS VÁLIDOS e INVÁLIDOS em relação ao total de CPFS testados foi de: ")
 
 
 
