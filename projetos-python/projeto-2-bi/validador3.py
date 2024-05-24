@@ -1,6 +1,6 @@
 cpf_armazen = list()
 controle_cpf = 0
-qtd_cpfs = 10
+qtd_cpfs = 0
 cpf_validos = 0
 cpf_invalidos = 0
 while True:
@@ -11,12 +11,12 @@ while True:
         segundo_dig = 0
         soma_dig = 0
         cpf_9digitos = ""
-        cpf_armazen.append({"CPF":[cpf_usuario], "VALIDACAO":"PROCESSANDO..."}) #Inserimos cpf em uma lista dentro de um dicionario
+        cpf_armazen.append({"CPF":[], "VALIDACAO":"PROCESSANDO..."}) #Uma lista dentro de um dicionario
         print(cpf_armazen)
         print("Cpf valido")
         print("-"*30)
         print(cpf_armazen)
-        cpf_9digitos = str(cpf_armazen[controle_cpf]['CPF'][0][0:9])
+        cpf_9digitos = str(cpf_usuario[0:9])
         print("Cpf 9 = ",cpf_9digitos) #Isso daqui é uma lista dentro de outra lista aaaaaa por isso o for não funcionava cpf_9digitos[0][0][i]
 
         #Inicializamos a variaveis dos verificadores e controladores
@@ -59,7 +59,7 @@ while True:
         cpf_9digitos += str(segundo_dig)
         print("CPF 9dig = ",cpf_9digitos)
         #Vendo se o cpf é realmente valido
-        if cpf_9digitos[-1] == str(cpf_armazen[controle_cpf]['CPF'][0][-1]) and cpf_9digitos[-2] == str(cpf_armazen[controle_cpf]['CPF'][0][-2]):
+        if cpf_9digitos[-1] == str(cpf_usuario[-1]) and cpf_9digitos[-2] == str(cpf_usuario[-2]):
             print("CPF valido valido")
             cpf_armazen[controle_cpf]["VALIDACAO"] = "VALIDO"
             print(cpf_armazen)
@@ -69,16 +69,20 @@ while True:
             cpf_armazen[controle_cpf]["VALIDACAO"] = "INVALIDO"
             print(cpf_armazen)
             cpf_invalidos += 1
+        cpf_armazen[controle_cpf]["CPF"].append(int(cpf_usuario))
+        print(cpf_armazen)
         qtd_cpfs += 1
         controle_cpf += 1
         if input(str("Dejesa Continuar o programa? s/n")) != "s":
             break
+# Após o laço while iremos imprimir os filtros sobre os cpfs testados
 print("-"*95)
-print(" "*13,f"A quantidade de CPFS testado foi de: {qtd_cpfs}")
-print(" "*13,f"A quantdade de CPFS VÁLIDOS foram de: {cpf_validos}")
-print(" "*13,f"A quantdade de CPFS INVÁLIDOS foram de: {cpf_invalidos}")
-print(" "*13,f"A porcentagem de CPFS VÁLIDOS em relação ao total de CPFS testados foi de: {(cpf_validos*100)/qtd_cpfs}")
-print(" "*13,f"A porcentagem de CPFS INVÁLIDOS em relação ao total de CPFS testados foi de: {(cpf_invalidos*100)/qtd_cpfs}")
+print(cpf_armazen)
+print(" "*13,f"A quantidade de CPFS testado(s) foi de: {qtd_cpfs}")
+print(" "*13,f"A quantdade de CPFS VÁLIDO(S) foram de: {cpf_validos}")
+print(" "*13,f"A quantdade de CPFS INVÁLIDO(S) foram de: {cpf_invalidos}")
+print(" "*13,f"A porcentagem de CPFS VÁLIDO(S) em relação ao total de CPFS testados foi de: {(cpf_validos*100)/qtd_cpfs}%")
+print(" "*13,f"A porcentagem de CPFS INVÁLIDO(S) em relação ao total de CPFS testados foi de: {(cpf_invalidos*100)/qtd_cpfs}%")
 print("-"*95)
 
 
