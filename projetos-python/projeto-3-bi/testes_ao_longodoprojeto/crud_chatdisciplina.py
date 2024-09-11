@@ -116,7 +116,6 @@ def excluirprofessor(rg=0):
         print(f'Erro: {erro}')
         return 'Não foi possível excluir este professor'
 
-# MÓDULO PRINCIPAL DO PROGRAMA
 if abrebanco() == 1:
     resp = input('Deseja entrar no módulo de Disciplinas? (1-Sim, ou qualquer tecla para sair) ==> ')
     while resp == '1':
