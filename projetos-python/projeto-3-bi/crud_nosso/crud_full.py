@@ -106,6 +106,8 @@ def cadastrar_professor():
             nome = input("Digite o nome do professor: ")
             telefone = input("Digite o telefone do professor: ")
             salario = float(input("Digite o salário do professor: "))
+            while(salario < 1 or salario < 1200):
+                salario = int(input("Digite o salário do professor: "))
             idade = int(input("Digite a idade do professor: "))
             while(idade < 1 or idade > 100):
                 idade = int(input("Digite a idade do professor: "))
@@ -132,7 +134,11 @@ def alterar_professor():
             registro = int(input("Digite o registro do professor que deseja alterar: "))
             nome = input("Digite o novo nome do professor: ")
             telefone = input("Digite o novo telefone do professor: ")
+            while(11 != len(telefone)):
+                telefone = input("Digite o novo telefone do professor: ")
             salario = float(input("Digite o novo salário do professor: "))
+            while(salario < 1 or salario < 1200):
+                salario = int(input("Digite o salário do professor: "))
             idade = int(input("Digite a nova idade do professor: "))
             while(idade < 1 or idade > 100):
                 idade = int(input("Digite a idade do professor: "))
@@ -176,7 +182,7 @@ def consultar_professores():
 
         try:
             cursor.execute("SELECT * FROM professores")
-            grid = PrettyTable(['Registro', 'Nome', 'Telefone', 'Idade', 'Salário'])
+            grid = PrettyTable(['Registro', 'Telefone', 'Nome', 'Idade', 'Salário'])
             for (registro, nome, telefone, idade, salario) in cursor:
                 grid.add_row([registro, nome, telefone, idade, salario])
             print(grid)
@@ -197,9 +203,17 @@ def cadastrar_relacao():
             codigo_disc = int(input("Digite o código da disciplina: "))
             registro_prof = int(input("Digite o código do professor: "))
             ano_curso = int(input("Digite o ano do curso: "))
+            while(ano_curso < 1900 or ano_curso > 2024):
+                ano_curso = int(input("Digite o ano do curso: "))
             carga_horaria = int(input("Digite a carga horária do professor: "))
-            curso = input("Digite o curso: ")
+            while(carga_horaria < 1 or carga_horaria > 12):
+                carga_horaria = int(input("Digite a carga horária do professor: "))
+            curso = int(input("Digite o curso: "))
+            while(curso < 1):
+                curso = int("Digite o curso: ")
             ano_letivo = int(input("Digite o ano letivo: "))
+            while(ano_letivo < 1):
+                ano_letivo = int(input("Digite o ano letivo: "))
             cursor.execute("""
                 INSERT INTO disciplinasxprofessores (coddisciplina, codprofessor, codigodisciplinanocurso, curso, cargahoraria, anoletivo)
                 VALUES (%s, %s, %s, %s, %s, %s)
@@ -246,9 +260,15 @@ def atualizar_relacao():
             cod_disc_curso = input("Digite o código da disciplina no curso que deseja atualizar: ")
             cod_disc = int(input("Digite o novo código da disciplina: "))
             cod_prof = int(input("Digite o novo código do professor: "))
-            curso = input("Digite o novo curso: ")
+            curso = int(input("Digite o novo curso: "))
+            while(curso < 1):
+                curso = int(input("Digite o novo curso: "))
             carga_horaria = int(input("Digite a nova carga horária: "))
+            while(carga_horaria < 1 or carga_horaria > 12):
+                carga_horaria = int(input("Digite a nova carga horária: "))
             ano_letivo = int(input("Digite o novo ano letivo: "))
+            while(ano_letivo < 1):
+                ano_letivo = int(input("Digite o novo ano letivo: "))
             cursor.execute("""
                 UPDATE disciplinasxprofessores
                 SET coddisciplina=%s, codprofessor=%s, curso=%s, cargahoraria=%s, anoletivo=%s
