@@ -19,67 +19,62 @@ def gerar_exel():
 
     # def para_planilha():
     df = pd.DataFrame(dict_dados)
-    print("DataFrame = ", df)
+    print(df)
     df.to_excel('NOTASFINAISALUNOS.xlsx', sheet_name = 'planilha_alunos', na_rep = '#N/A', header = True, index = False)
 
 def verifica_notas(nome_materia, nota):
-    if(nota.isnumeric() == True):
-        nota = int(nota)
-        if(nota <= 10 and nota >= 0):
-            print(f"{nome_materia} = {nota}")
-        else:
-            nota = input(f"Redigite sua nota de {nome_materia}: ")
+    if(nota <= 10 and nota >= 0):
+        print(f"{nome_materia} = {nota}")
     else:
-        while(nota.isnumeric() == False):
-                nota = input(f"Redigite sua nota de {nome_materia}: ")
+        while(nota > 10 and nota < 0):
+            nota = input(f"Redigite sua nota de {nome_materia}: ")
 lista_dados = [[],[],[],[],[],[],[],[],[]]
 def forms_digitacao():
-    while True:
-        aluno_ra = input("Digite a sua matrícula: ")
-        while(len(aluno_ra) != 6):
-            aluno_ra = input("Redigite a sua matrícula: ")
+    try:
+        while True:
+            aluno_ra = input("Digite a matrícula do aluno: ")
+            while(len(aluno_ra) <= 6 and aluno_ra.isnumeric() == False):
+                aluno_ra = input("Redigite a matrícula do aluno: ")
 
-        nome_aluno = input("Digite o nome do aluno: ")
-        while(nome_aluno == "" or nome_aluno.isnumeric() == True or len(nome_aluno) <= 3):
-            nome_aluno = input("Redigite o nome do aluno: ")
+            nome_aluno = input("Digite o nome do aluno: ")
+            while(nome_aluno == "" or nome_aluno.isnumeric() == True or len(nome_aluno) <= 3):
+                nome_aluno = input("Redigite o nome do aluno: ")
 
-        nota_pvb = input("Digite a nota da matéria P.V.B.: ")
-        verifica_notas("P.V.B.",nota_pvb)
-        nota_paw = input("Digite a nota da matéria P.A.W.: ")
-        verifica_notas("P.A.W.",nota_paw)
-        nota_bd = input("Digite a nota da matéria B.D.: ")
-        verifica_notas("B.D.",nota_bd)
-        nota_poo = input("Digite a nota da matéria P.O.O.: ")
-        verifica_notas("P.O.O.",nota_poo)
-        nota_pvb = int(nota_pvb)
-        nota_paw = int(nota_paw)
-        nota_bd =  int(nota_bd)
-        nota_poo =  int(nota_poo)
-        media = (nota_pvb + nota_paw + nota_poo + nota_bd) / 4
-        lista_dados[0].append(aluno_ra)
-        lista_dados[1].append(nome_aluno)
-        lista_dados[2].append(nota_pvb)
-        lista_dados[3].append(nota_paw)
-        lista_dados[4].append(nota_bd)
-        lista_dados[5].append(nota_poo)
-        lista_dados[6].append(media)
-        situacao, cor = verificar_situacao(media)
-        lista_dados[7].append(situacao)
-        lista_dados[8].append(cor)
-        gere = input("Deseja gerar um html de todos alunos do exel? s/n")
-        # gerar_html(aluno_ra, nome_aluno,  nota_pvb, nota_paw, nota_bd, nota_poo, media, situacao, cor)
-        res = input("Deseja inserir mais um aluno no exel? s/n ")
-        if(res.lower() != "s"):
-            break
-    gerar_exel()
-    gere = input("Deseja gerar um html de todos aluno(s) do exel? s/n")
-    if(gere.lower() == "s"):
-        gerar_html(lista_dados[0], lista_dados[1],  lista_dados[2], lista_dados[3], lista_dados[4], lista_dados[5], lista_dados[6], lista_dados[7], lista_dados[8])
-
+            nota_pvb = float(input("Digite a nota da matéria P.V.B.: "))
+            verifica_notas("P.V.B.",nota_pvb)
+            nota_paw = float(input("Digite a nota da matéria P.A.W.: "))
+            verifica_notas("P.A.W.",nota_paw)
+            nota_bd = float(input("Digite a nota da matéria B.D.: "))
+            verifica_notas("B.D.",nota_bd)
+            nota_poo = float(input("Digite a nota da matéria P.O.O.: "))
+            verifica_notas("P.O.O.",nota_poo)
+            media = (nota_pvb + nota_paw + nota_poo + nota_bd) / 4
+            lista_dados[0].append(aluno_ra)
+            lista_dados[1].append(nome_aluno)
+            lista_dados[2].append(nota_pvb)
+            lista_dados[3].append(nota_paw)
+            lista_dados[4].append(nota_bd)
+            lista_dados[5].append(nota_poo)
+            lista_dados[6].append(media)
+            situacao, cor = verificar_situacao(media)
+            lista_dados[7].append(situacao)
+            lista_dados[8].append(cor)
+            # gerar_html(aluno_ra, nome_aluno,  nota_pvb, nota_paw, nota_bd, nota_poo, media, situacao, cor)
+            res = input("Deseja inserir mais um aluno no exel? s/n ")
+            if(res.lower() != "s"):
+                break
+        gerar_exel()
+        gere = input("Deseja gerar um html de todos aluno(s) do exel? s/n")
+        if(gere.lower() == "s"):
+            gerar_html(lista_dados[0], lista_dados[1],  lista_dados[2], lista_dados[3], lista_dados[4], lista_dados[5], lista_dados[6], lista_dados[7], lista_dados[8])
+    except Exception as erro:
+        print("Ocorreu um erro: ",erro)
+        menu()
+    menu()
 def gerar_html(aluno_ra, nome_aluno,  nota_pvb, nota_paw, nota_bd, nota_poo, media, situacao, cor):
     for aluno_ra, nome_aluno, nota_pvb, nota_paw, nota_bd, nota_poo, media, situacao, cor in zip(aluno_ra, nome_aluno, nota_pvb, nota_paw, nota_bd, nota_poo, media, situacao, cor):
         arquivo = open(aluno_ra+".html", "w")
-        arquivo.write(f"<!DOCTYPE html>\n<html lang='pt-br'>\n<head>\n    <meta charset='UTF-8'>\n    <meta name='viewport' content='width=device-width, initial-scale=1.0'>\n    <title>{aluno_ra}</title>\n<link rel='stylesheet' href='style.css'>\n</head>\n<body>\n<div>\n    <p>Matricula: {aluno_ra}</p>\n    <p>Aluno</p>\n    <p id='nome'>{nome_aluno}<p>\n    <table>\n        <tr>\n            <th>PVB</th>\n            <th>PAW</th>\n            <th>BD</th>\n            <th>POO</th>\n            <th>MEDIA</th>\n        </tr>\n        <tr>\n            <td>{nota_pvb}</td>\n            <td>{nota_paw}</td>\n            <td>{nota_bd}</td>\n            <td>{nota_poo}</td>\n            <td>{media}</td>\n        </tr>\n    </table>\n    <p>Situacao final: <p style='background-color: {cor};'>{situacao}</p></p>\n</div>\n</body>\n</html>")
+        arquivo.write(f"<!DOCTYPE html>\n<html lang='pt-br'>\n<head>\n    <meta charset='UTF-8'>\n    <meta name='viewport' content='width=device-width, initial-scale=1.0'>\n    <title>{aluno_ra}</title>\n<link rel='stylesheet' href='style.css'>\n</head>\n<body>\n<div>\n    <p>Matricula: {aluno_ra}</p>\n    <p>Aluno</p>\n    <p id='nome'>{nome_aluno}<p>\n    <table>\n        <tr>\n            <th>PVB</th>\n            <th>PAW</th>\n            <th>BD</th>\n            <th>POO</th>\n            <th>MEDIA</th>\n        </tr>\n        <tr>\n            <td>{nota_pvb:,.2f}</td>\n            <td>{nota_paw:,.2f}</td>\n            <td>{nota_bd:,.2f}</td>\n            <td>{nota_poo:,.2f}</td>\n            <td>{media:,.2f}</td>\n        </tr>\n    </table>\n    <p>Situacao final: <p style='background-color: {cor};'>{situacao}</p></p>\n</div>\n</body>\n</html>")
         arquivo.close()
 
 def ver():
@@ -96,8 +91,8 @@ def menu():
         forms_digitacao()
     elif(opc == 2):
         ver()
-    # elif(opc == 3):
-    #     break
+    elif(opc == 3):
+        print("Saindo...")
 menu()
 print("FIM DO Programa!!!")
 # def gerar_html():

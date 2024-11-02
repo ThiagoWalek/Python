@@ -26,6 +26,7 @@ p#nome {
     color: white;
     padding: 10px;
     text-align: center;
+    margin: 0px auto;
 }
 
 div {
